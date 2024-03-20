@@ -3,10 +3,10 @@
 
 const bowling = {
     "players": [
-        {"name": "Fabrizio", "scores1": [], "scores2": [], "finalScore":0},
-        {"name": "Roberta", "scores1": [], "scores2": [], "finalScore":0},
-        {"name": "Michele", "scores1": [], "scores2": [], "finalScore":0},
-        {"name": "Karim", "scores1": [], "scores2": [], "finalScore":0},
+        {"name": "Giocatore 1", "scores1": [], "scores2": [], "finalScore":0},
+        {"name": "Giocatore 2", "scores1": [], "scores2": [], "finalScore":0},
+        {"name": "Giocatore 3", "scores1": [], "scores2": [], "finalScore":0},
+        {"name": "Giocatore 4", "scores1": [], "scores2": [], "finalScore":0},
     ],
     "setScores": function(){
         if(this.players[0].scores1.length < 10){
@@ -38,7 +38,7 @@ const bowling = {
         
     },
     "setNewPlayer": function(nome){
-        this.players.push(  {"name": nome, "scores": [], "finalScore": 0, "tiro1": 0, "tiro2": 0}  )
+        this.players.push(  {"name": nome, "scores1": [],"scores2": [], "finalScore": 0}  )
     },
     "createTable": function(){
         playersWrapper.innerHTML = "";
@@ -119,6 +119,7 @@ btnStart.addEventListener("click", ()=>{
 //Gioca Turno
 let playRound = document.querySelector("#playRound")
 let gameOver = document.querySelector("#gameOver")
+let winnerPrint = document.querySelector("#winnerPrint")
 playRound.addEventListener("click", ()=>{
     bowling.setScores();
     bowling.createTable();
@@ -126,6 +127,9 @@ playRound.addEventListener("click", ()=>{
         btnResults.classList.remove("d-none")
         playRound.classList.add("d-none")
         gameOver.classList.remove("d-none")
+        winnerPrint.classList.remove("d-none")
+        bowling.setWinner2();
+        winnerPrint.innerHTML=`Il vincitore è ${bowling.players[0].name}`;
     }
     console.log(bowling.players)
 })
@@ -154,9 +158,6 @@ btnResults.addEventListener("click", ()=>{
     bowling.setModalResults();
 })
 
-
-
-
 // Reset Partita
 let btnResetGame = document.querySelector("#btnResetGame")
 
@@ -168,7 +169,8 @@ btnResetGame.addEventListener("click", ()=>{
     playRound.classList.add("d-none");
     btnResults.classList.add("d-none");
     btnRestartGame.classList.add("d-none");
-    gameOver.classList.add("d-none")
+    gameOver.classList.add("d-none");
+    winnerPrint.classList.add("d-none");
 })
 
 // Riavvia Partita
@@ -179,7 +181,8 @@ btnRestartGame.addEventListener("click", ()=>{
     bowling.createTable();
     btnStart.classList.remove("d-none");
     btnResults.classList.add("d-none");
-    gameOver.classList.add("d-none")
+    gameOver.classList.add("d-none");
+    winnerPrint.classList.add("d-none");
 })
 
 
